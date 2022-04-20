@@ -20,7 +20,7 @@ To-do :
 - [Post message] create "post pesan" interface
 consist of = input form, button
 - [Post message] trying to post data from user input to fake API or public API
-- create register interface
-- create login interface
+- [Register] create register interface
+- [Login] create login interface
 
 
