@@ -1,0 +1,26 @@
+Done :
+A. Initialize
+- Install
+- Setup
+- Run emulator with default code (counter app)
+run on chrome and edge
+B. Basic
+- understand basic knowledge about flutter
+Widget (MateriapApp, Scaffold, etc), argument, etc
+- trying to build and edit some basic and important widgets and components
+such as : appBar, debugBanner, 
+C. Get message
+- get and print data from fake API or public API
+
+Do :
+- [Basic] Create multple pages and routing each others
+
+To-do :
+- [Post message] trying to post dummy or local data to  fake API or public API
+- [Post message] create "post pesan" interface
+consist of = input form, button
+- [Post message] trying to post data from user input to fake API or public API
+- create register interface
+- create login interface
+
+
