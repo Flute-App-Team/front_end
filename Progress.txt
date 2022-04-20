@@ -8,7 +8,7 @@ B. Basic
 - understand basic knowledge about flutter
 Widget (MateriapApp, Scaffold, etc), argument, etc
 - trying to build and edit some basic and important widgets and components
-such as : appBar, debugBanner, 
+such as : appBar(edit title), debugBanner (remove), body, bottomNavigationBar (edit label and icon), etc
 C. Get message
 - get and print data from fake API or public API
 D. Pos message
