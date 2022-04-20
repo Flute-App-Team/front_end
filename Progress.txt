@@ -11,6 +11,9 @@ Widget (MateriapApp, Scaffold, etc), argument, etc
 such as : appBar, debugBanner, 
 C. Get message
 - get and print data from fake API or public API
+D. Pos message
+E. Register
+F. Login
 
 Do :
 - [Basic] Create multple pages and routing each others
