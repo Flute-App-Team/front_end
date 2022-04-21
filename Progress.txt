@@ -12,23 +12,31 @@ such as : appBar(edit title), debugBanner (remove), body, bottomNavigationBar (e
 - Create multple pages and routing each others
 C. Get message
 - get and print data from fake API or public API
-D. Pos message
+D. Profile
 E. Register
 F. Login
+G. Integration
 
 Do :
 - [Register] create register interface
-username
-password
-confirm password
+button masih kurang tepat
+- [Login] create login interface
+button masih kurang tepat
+- [Post message] create "post pesan" interface
+hapus bagian register
 
 To-do :
+- [Profile] buat beberapa bagian
+send message, get message user tersebut, button log out (dibuat memanjang)
+- [Additional] create splashscreen interface
+- [Integration] routing several pages
+login, register, home, and send pesan
+Flow :
+Splashscreen -> Register
 - [Post message] trying to post dummy or local data to  fake API or public API
-- [Post message] create "post pesan" interface
-consist of = input form, button
 - [Post message] trying to post data from user input to fake API or public API
-- [Login] create login interface
-
+- [Register] Data validation
+username, password, and confirm password
 
 PROBLEMS:
 - theres any deprecated issue
@@ -38,7 +46,8 @@ tapi tanpa itupun, still working, hmm
 - whats difference for each Navigator function
 ex : push, pushreplacement, pop, etc
 pengaruhnya ke bagaimana next page, ada yg punya back button di kiri atas, ada yg ngga ada
-
+- belum terlalu paham, tentang validation
+halaman register sudah ada validasi username, tapi belum dipahami
 
 
 

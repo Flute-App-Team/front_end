@@ -1,18 +1,16 @@
 import 'dart:convert';
 
-import 'package:flute/getMessage.dart';
-import 'package:flute/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
-class Beranda extends StatefulWidget {
-  const Beranda({Key? key}) : super(key: key);
+class GetMessage extends StatefulWidget {
+  const GetMessage({Key? key}) : super(key: key);
 
   @override
-  State<Beranda> createState() => _BerandaState();
+  State<GetMessage> createState() => _GetMessageState();
 }
 
-class _BerandaState extends State<Beranda> {
+class _GetMessageState extends State<GetMessage> {
   final url = "https://jsonplaceholder.typicode.com/posts";
 
   var _postsJson = [];
@@ -29,33 +27,13 @@ class _BerandaState extends State<Beranda> {
   }
 
   int _currentIndex = 0;
-  final List<Widget> _children = [GetMessage(), Profile()];
+  final List<Widget> _children = [];
 
   void onTappedBar(int index) {
     setState(() {
       _currentIndex = index;
     });
   }
-
-  // int _selectedIndex = 0;
-  // static const TextStyle optionStyle =
-  //     TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  // static const List<Widget> _widgetOptions = <Widget>[
-  //   Text(
-  //     'Index 0: Home',
-  //     style: optionStyle,
-  //   ),
-  //   Text(
-  //     'Index 1: Business',
-  //     style: optionStyle,
-  //   ),
-  // ];
-
-  // void _onItemTapped(int index) {
-  //   setState(() {
-  //     _selectedIndex = index;
-  //   });
-  // }
 
   @override
   void initState() {
@@ -68,17 +46,17 @@ class _BerandaState extends State<Beranda> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        // appBar: AppBar(
-        //   title: Text('Flute App'),
-        // ),
-        // body: ListView.builder(
-        //   itemCount: _postsJson.length,
-        //   itemBuilder: (context, i) {
-        //     final post = _postsJson[i];
-        //     return Text(
-        //         "Title : ${post["title"]}\n Body : ${post["body"]}\n\n ");
-        //   },
-        // ),
+        appBar: AppBar(
+          title: Text('Flute App'),
+        ),
+        body: ListView.builder(
+          itemCount: _postsJson.length,
+          itemBuilder: (context, i) {
+            final post = _postsJson[i];
+            return Text(
+                "Title : ${post["title"]}\n Body : ${post["body"]}\n\n ");
+          },
+        ),
         // bottomNavigationBar: BottomNavigationBar(
         //   items: const <BottomNavigationBarItem>[
         //     BottomNavigationBarItem(
@@ -94,16 +72,16 @@ class _BerandaState extends State<Beranda> {
         //   // selectedItemColor: Colors.amber[800],
         //   // onTap: _onItemTapped,
         // ),
-        body: _children[_currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          onTap: onTappedBar,
-          currentIndex: _currentIndex,
-          items: [
-            BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.home)),
-            BottomNavigationBarItem(
-                label: 'Profile', icon: Icon(Icons.account_circle))
-          ],
-        ),
+        // body: _children[_currentIndex],
+        // bottomNavigationBar: BottomNavigationBar(
+        //   onTap: onTappedBar,
+        //   currentIndex: _currentIndex,
+        //   items: [
+        //     BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.home)),
+        //     BottomNavigationBarItem(
+        //         label: 'Profile', icon: Icon(Icons.account_circle))
+        //   ],
+        // ),
       ),
     );
   }
