@@ -1,6 +1,9 @@
+import 'dart:html';
+
 import 'package:flute/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter/gestures.dart';
 
 class Register extends StatelessWidget {
   @override
@@ -89,26 +92,76 @@ class _HomeState extends State<Home> {
                   // },
                 ),
                 SizedBox(height: height * 0.05),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Login",
-                        style:
-                            TextStyle(fontSize: 22, color: Color(0xFF363f93))),
-                    NeumorphicButton(
-                      margin: EdgeInsets.only(top: 12),
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return Login();
-                        }));
-                      },
-                      style: NeumorphicStyle(
-                          shape: NeumorphicShape.flat,
-                          boxShape: NeumorphicBoxShape.stadium()),
-                    )
-                  ],
-                )
+                Container(
+                  width: 750.0,
+                  height: 50.0,
+                  // ignore: deprecated_member_use
+                  child: RaisedButton(
+                    child: Text("Register"),
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return Login();
+                      }));
+                    },
+                  ),
+                ),
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'Have an account already?',
+                        // style: TextStyle(color: Colors.red[300]),
+                      ),
+                      TextSpan(
+                        text: ' Login',
+                        style: TextStyle(color: Colors.blue),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return Login();
+                            }));
+                          },
+                      ),
+                    ],
+                  ),
+                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Text("Have an account already?"),
+                //     GestureDetector(
+                //         child: Text("Login",
+                //             style: TextStyle(
+                //                 fontSize: 22, color: Color(0xFF363f93))),
+                //         onTap: () {
+                //           Navigator.of(context).pushReplacement(
+                //               MaterialPageRoute(
+                //                   builder: (BuildContext context) => Login()));
+                //         }),
+                //   ],
+                //   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   // children: [
+                //   //   Text("Login",
+                //   //       style:
+                //   //           TextStyle(fontSize: 22, color: Color(0xFF363f93))),
+                //   //   NeumorphicButton(
+                //   //     margin: EdgeInsets.only(top: 12),
+                //   //     onPressed: () {
+                //   //       Navigator.push(context,
+                //   //           MaterialPageRoute(builder: (context) {
+                //   //         return Login();
+                //   //       }));
+                //   //     },
+                //   //     style: NeumorphicStyle(
+                //   //         shape: NeumorphicShape.flat,
+                //   //         boxShape: NeumorphicBoxShape.stadium()),
+                //   //   )
+                //   // ],
+                // )
               ],
             ),
           ),

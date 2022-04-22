@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:flute/getMessage.dart';
+import 'package:flute/postMessage.dart';
 import 'package:flute/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -103,6 +105,14 @@ class _BerandaState extends State<Beranda> {
             BottomNavigationBarItem(
                 label: 'Profile', icon: Icon(Icons.account_circle))
           ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return postMessage();
+            }));
+          },
+          child: Icon(Icons.add),
         ),
       ),
     );

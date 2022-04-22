@@ -12,32 +12,42 @@ such as : appBar(edit title), debugBanner (remove), body, bottomNavigationBar (e
 - Create multple pages and routing each others
 C. Get message
 - get and print data from fake API or public API
-D. Profile
-E. Register
-F. Login
-G. Integration
+D. Post message
+- create "post pesan" interface
+E. Profile
+- create logout button, direct to login page
+F. Register
+- create register interface
+G. Login
+- create login interface
 
 Do :
-- [Register] create register interface
-button masih kurang tepat
-- [Login] create login interface
-button masih kurang tepat
-- [Post message] create "post pesan" interface
-hapus bagian register
+- [Get message]
+create better interface for messages, such as : add line or box, create padding (left and right)
 
 To-do :
-- [Profile] buat beberapa bagian
-send message, get message user tersebut, button log out (dibuat memanjang)
-- [Additional] create splashscreen interface
-- [Integration] routing several pages
-login, register, home, and send pesan
-Flow :
-Splashscreen -> Register
-- [Post message] trying to post dummy or local data to  fake API or public API
+- [Post message] trying to post dummy or local data to fake API or public API
 - [Post message] trying to post data from user input to fake API or public API
+- [Minor issues] fix some minor issues
+* General
+remove Debug banner from all pages
+* Register
+buat margin top
+* Login
+ngga bisa pale tanda petik, contoh "don't", jadi ditulis "dont",
+buat margin top
+- [Get messages] get messages from server
+- [Post message] trying to post dummy or local data to server
+- [Post message] trying to post data from user input to server
+- [Additional] halaman profile
+get message user tersebut dari server, 
+show profile : username dan default photo
 - [Register] Data validation
 username, password, and confirm password
+- [Additional] splashscreen
+create splashscreen interface
 
+=========================================================================================================
 PROBLEMS:
 - theres any deprecated issue
 bisa di solved, dg klik help
@@ -48,6 +58,8 @@ ex : push, pushreplacement, pop, etc
 pengaruhnya ke bagaimana next page, ada yg punya back button di kiri atas, ada yg ngga ada
 - belum terlalu paham, tentang validation
 halaman register sudah ada validasi username, tapi belum dipahami
+- build apk
+belum kebayang apa bisa di build ke apk?
 
 
 
