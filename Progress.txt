@@ -20,6 +20,7 @@ F. Register
 - create register interface
 G. Login
 - create login interface
+H. Build
 
 Do :
 - [Get message]
@@ -39,11 +40,14 @@ buat margin top
 - [Get messages] get messages from server
 - [Post message] trying to post dummy or local data to server
 - [Post message] trying to post data from user input to server
+- [Build] build and release
+android,
+ios
+- [Register] Data validation
+username, password, and confirm password
 - [Additional] halaman profile
 get message user tersebut dari server, 
 show profile : username dan default photo
-- [Register] Data validation
-username, password, and confirm password
 - [Additional] splashscreen
 create splashscreen interface
 
