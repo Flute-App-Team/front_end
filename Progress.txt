@@ -50,6 +50,8 @@ get message user tersebut dari server,
 show profile : username dan default photo
 - [Additional] splashscreen
 create splashscreen interface
+- [Additional] Launcher icon
+Reference : https://docs.flutter.dev/deployment/android#adding-a-launcher-icon
 
 =========================================================================================================
 PROBLEMS:
@@ -63,7 +65,14 @@ pengaruhnya ke bagaimana next page, ada yg punya back button di kiri atas, ada y
 - belum terlalu paham, tentang validation
 halaman register sudah ada validasi username, tapi belum dipahami
 - build apk
-belum kebayang apa bisa di build ke apk?
+
+
+password = fluteApp
+f
+
+  keytool -genkey -v -keystore c:\Users\USER_NAME\upload-keystore.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+
+  keytool -genkey -v -keystore c:\Users\user\Documents\FluteApp\flute-keystore.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias flute
 
 
 

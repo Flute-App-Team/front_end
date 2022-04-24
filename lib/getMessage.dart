@@ -11,13 +11,19 @@ class GetMessage extends StatefulWidget {
 }
 
 class _GetMessageState extends State<GetMessage> {
-  final url = "https://jsonplaceholder.typicode.com/posts";
+  // final url = "https://jsonplaceholder.typicode.com/posts";
+  final url = "http://localhost:8080/message";
+  Map<String, String> requestHeaders = {
+    'Authorization':
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlJpemtpIiwiaWF0IjoxNjUwNzc3NTk3fQ.sJIRhYto4qsep4HB_-P_k_tn1emrSctCuPJoVqPzwQg'
+    // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlJpemtpIiwiaWF0IjoxNjUwNzc3NTk3fQ.sJIRhYto4qsep4HB_-P_k_tn1emrSctCuPJoVqPzwQg'
+  };
 
   var _postsJson = [];
 
   void fetchPosts() async {
     try {
-      final response = await get(Uri.parse(url));
+      final response = await get(Uri.parse(url), headers: requestHeaders);
       final jsonData = jsonDecode(response.body) as List;
 
       setState(() {
@@ -54,7 +60,7 @@ class _GetMessageState extends State<GetMessage> {
           itemBuilder: (context, i) {
             final post = _postsJson[i];
             return Text(
-                "Title : ${post["title"]}\n Body : ${post["body"]}\n\n ");
+                "Username : ${post["username"]}\n Message : ${post["message"]}\n\n ");
           },
         ),
         // bottomNavigationBar: BottomNavigationBar(
