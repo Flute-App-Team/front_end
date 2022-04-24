@@ -12,19 +12,34 @@ class GetMessage extends StatefulWidget {
 }
 
 class _GetMessageState extends State<GetMessage> {
+<<<<<<< HEAD
   final url = "http://localhost:8080/message";
   final requestHeaders = {
     HttpHeaders.authorizationHeader: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlJpemtpIiwiaWF0IjoxNjUwNzg1ODc1fQ.w5IEU2FkNeXHKsRM3YJFng-cRBP78FOe9G3QuQjPs08',
   };
+=======
+  // final url = "https://jsonplaceholder.typicode.com/posts";
+  final url = "http://localhost:8080/message";
+  Map<String, String> requestHeaders = {
+    'Authorization':
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlJpemtpIiwiaWF0IjoxNjUwNzc3NTk3fQ.sJIRhYto4qsep4HB_-P_k_tn1emrSctCuPJoVqPzwQg'
+    // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlJpemtpIiwiaWF0IjoxNjUwNzc3NTk3fQ.sJIRhYto4qsep4HB_-P_k_tn1emrSctCuPJoVqPzwQg'
+  };
+
+>>>>>>> 1041c298145cd66869a0860e94ba7db7d9ca1b68
   var _postsJson = [];
 
   void fetchPosts() async {
     try {
+<<<<<<< HEAD
       final response = await http.get(
         Uri.parse('http://localhost:8080/message'),
         // Send authorization headers to the backend.
         headers: requestHeaders,
       );
+=======
+      final response = await get(Uri.parse(url), headers: requestHeaders);
+>>>>>>> 1041c298145cd66869a0860e94ba7db7d9ca1b68
       final jsonData = jsonDecode(response.body) as List;
 
       setState(() {
