@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'dart:io';
 
 class GetMessage extends StatefulWidget {
@@ -14,7 +14,8 @@ class GetMessage extends StatefulWidget {
 class _GetMessageState extends State<GetMessage> {
   final url = "http://localhost:8080/message";
   final requestHeaders = {
-    HttpHeaders.authorizationHeader: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlJpemtpIiwiaWF0IjoxNjUwNzg1ODc1fQ.w5IEU2FkNeXHKsRM3YJFng-cRBP78FOe9G3QuQjPs08',
+    HttpHeaders.authorizationHeader:
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlJpemtpIiwiaWF0IjoxNjUwNzg1ODc1fQ.w5IEU2FkNeXHKsRM3YJFng-cRBP78FOe9G3QuQjPs08',
   };
   var _postsJson = [];
 
@@ -26,8 +27,7 @@ class _GetMessageState extends State<GetMessage> {
       setState(() {
         _postsJson = jsonData;
       });
-    }
-    catch (e) {
+    } catch (e) {
       print(e);
     }
   }
