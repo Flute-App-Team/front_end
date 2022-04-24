@@ -1,7 +1,8 @@
 import 'dart:convert';
-
+import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
+import 'dart:io';
 
 class GetMessage extends StatefulWidget {
   const GetMessage({Key? key}) : super(key: key);
@@ -11,19 +12,28 @@ class GetMessage extends StatefulWidget {
 }
 
 class _GetMessageState extends State<GetMessage> {
-  final url = "https://jsonplaceholder.typicode.com/posts";
-
+  final url = "http://localhost:8080/message";
+  final requestHeaders = {
+    HttpHeaders.authorizationHeader: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlJpemtpIiwiaWF0IjoxNjUwNzg1ODc1fQ.w5IEU2FkNeXHKsRM3YJFng-cRBP78FOe9G3QuQjPs08',
+  };
   var _postsJson = [];
 
   void fetchPosts() async {
     try {
-      final response = await get(Uri.parse(url));
+      final response = await http.get(
+        Uri.parse('http://localhost:8080/message'),
+        // Send authorization headers to the backend.
+        headers: requestHeaders,
+      );
       final jsonData = jsonDecode(response.body) as List;
 
       setState(() {
         _postsJson = jsonData;
       });
-    } catch (e) {}
+    }
+    catch (e) {
+      print(e);
+    }
   }
 
   int _currentIndex = 0;
@@ -54,7 +64,7 @@ class _GetMessageState extends State<GetMessage> {
           itemBuilder: (context, i) {
             final post = _postsJson[i];
             return Text(
-                "Title : ${post["title"]}\n Body : ${post["body"]}\n\n ");
+                "Username : ${post["username"]}\n Message : ${post["message"]}\n\n ");
           },
         ),
         // bottomNavigationBar: BottomNavigationBar(
