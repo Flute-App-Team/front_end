@@ -30,8 +30,7 @@ class _GetMessageState extends State<GetMessage> {
       setState(() {
         _postsJson = jsonData;
       });
-    }
-    catch (e) {
+    } catch (e) {
       print(e);
     }
   }
