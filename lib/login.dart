@@ -1,9 +1,13 @@
 import 'dart:html';
+import 'dart:convert';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flute/beranda.dart';
 import 'package:flutter/material.dart';
 import 'package:flute/register.dart';
 import 'package:flutter/gestures.dart';
+import 'package:http/http.dart';
+
+import 'package:flute/globals.dart' as globals;
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -15,6 +19,25 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final formKey = GlobalKey<FormState>(); //key for form
   String name = "";
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  void tryLogin(username, password) async {
+    try {
+      final url = "http://localhost:8080/login";
+      final requestBody = json.encode({'username': '$username', 'password': '$password'});
+      final response = await post(Uri.parse(url), headers: {"Content-Type": "application/json"}, body: requestBody);
+      globals.token = response.body;
+      print(globals.token);
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) {
+        return Beranda();
+      }));
+    }
+    catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +69,7 @@ class _LoginState extends State<Login> {
                 ),
                 SizedBox(height: height * 0.05),
                 TextFormField(
+                  controller: usernameController,
                   decoration: InputDecoration(labelText: "Username"),
                   validator: (value) {
                     if (value!.isEmpty ||
@@ -58,6 +82,7 @@ class _LoginState extends State<Login> {
                 ),
                 SizedBox(height: height * 0.05),
                 TextFormField(
+                  controller: passwordController,
                   decoration: InputDecoration(labelText: "Password"),
                   // validator: (value) {
                   //   if (value!.isEmpty ||
@@ -78,10 +103,7 @@ class _LoginState extends State<Login> {
                     color: Colors.blue,
                     textColor: Colors.white,
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return Beranda();
-                      }));
+                      tryLogin(usernameController.text, passwordController.text);
                     },
                   ),
                 ),

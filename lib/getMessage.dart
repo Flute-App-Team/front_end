@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'dart:io';
+import 'package:flutter/gestures.dart';
+import 'package:flute/globals.dart' as globals;
 
 class GetMessage extends StatefulWidget {
   const GetMessage({Key? key}) : super(key: key);
@@ -12,14 +14,16 @@ class GetMessage extends StatefulWidget {
 }
 
 class _GetMessageState extends State<GetMessage> {
-  final url = "http://localhost:8080/message";
-  final requestHeaders = {
-    HttpHeaders.authorizationHeader: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlJpemtpIiwiaWF0IjoxNjUwNzg1ODc1fQ.w5IEU2FkNeXHKsRM3YJFng-cRBP78FOe9G3QuQjPs08',
-  };
+  
   var _postsJson = [];
 
   void fetchPosts() async {
     try {
+      final url = "http://localhost:8080/message";
+      final token = globals.token;
+      final requestHeaders = {
+        HttpHeaders.authorizationHeader: 'Bearer $token',
+      };
       final response = await get(Uri.parse(url), headers: requestHeaders);
       final jsonData = jsonDecode(response.body) as List;
 
