@@ -14,7 +14,6 @@ class GetMessage extends StatefulWidget {
 }
 
 class _GetMessageState extends State<GetMessage> {
-  
   var _postsJson = [];
 
   void fetchPosts() async {
@@ -63,7 +62,7 @@ class _GetMessageState extends State<GetMessage> {
           itemBuilder: (context, i) {
             final post = _postsJson[i];
             return Text(
-                "Username : ${post["username"]}\n Message : ${post["message"]}\n\n ");
+                "Username : ${post["username"]} | ${post["timestamp"]} \nMessage : ${post["message"]}\n\n ");
           },
         ),
         // bottomNavigationBar: BottomNavigationBar(

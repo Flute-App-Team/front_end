@@ -25,16 +25,16 @@ class _LoginState extends State<Login> {
   void tryLogin(username, password) async {
     try {
       final url = "http://localhost:8080/login";
-      final requestBody = json.encode({'username': '$username', 'password': '$password'});
-      final response = await post(Uri.parse(url), headers: {"Content-Type": "application/json"}, body: requestBody);
+      final requestBody =
+          json.encode({'username': '$username', 'password': '$password'});
+      final response = await post(Uri.parse(url),
+          headers: {"Content-Type": "application/json"}, body: requestBody);
       globals.token = response.body;
       print(globals.token);
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
         return Beranda();
       }));
-    }
-    catch (e) {
+    } catch (e) {
       print(e);
     }
   }
@@ -84,6 +84,9 @@ class _LoginState extends State<Login> {
                 TextFormField(
                   controller: passwordController,
                   decoration: InputDecoration(labelText: "Password"),
+                  obscureText: true,
+                  enableSuggestions: false,
+                  autocorrect: false,
                   // validator: (value) {
                   //   if (value!.isEmpty ||
                   //       !RegExp(r'^[a-z A-Z]+$').hasMatch(value!)) {
@@ -103,7 +106,8 @@ class _LoginState extends State<Login> {
                     color: Colors.blue,
                     textColor: Colors.white,
                     onPressed: () {
-                      tryLogin(usernameController.text, passwordController.text);
+                      tryLogin(
+                          usernameController.text, passwordController.text);
                     },
                   ),
                 ),
@@ -111,7 +115,7 @@ class _LoginState extends State<Login> {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: 'Dont have an account?',
+                        text: 'Don' 't have an account?',
                         // style: TextStyle(color: Colors.red[300]),
                       ),
                       TextSpan(
