@@ -1,8 +1,11 @@
 import 'dart:html';
+import 'dart:convert';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flute/beranda.dart';
 import 'package:flutter/material.dart';
 import 'package:flute/register.dart';
+import 'package:http/http.dart';
+import 'package:flute/globals.dart' as globals;
 
 class postMessage extends StatefulWidget {
   const postMessage({Key? key}) : super(key: key);
@@ -14,6 +17,28 @@ class postMessage extends StatefulWidget {
 class _postMessageState extends State<postMessage> {
   final formKey = GlobalKey<FormState>(); //key for form
   String name = "";
+  TextEditingController messageController = TextEditingController();
+
+  void postAMessage(message) async {
+    try {
+      final url = "http://localhost:8080/message";
+      final token = globals.token;
+      final requestBody = json.encode({'message': '$message'});
+      final requestHeaders = {
+        'Content-Type': 'application/json',
+        'authorization': 'Bearer $token'
+      };
+      final response = await post(Uri.parse(url), headers: requestHeaders, body: requestBody);
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) {
+        return Beranda();
+      }));
+    }
+    catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
@@ -40,6 +65,7 @@ class _postMessageState extends State<postMessage> {
                 ),
                 SizedBox(height: height * 0.05),
                 TextFormField(
+                  controller: messageController,
                   decoration: InputDecoration(labelText: "Enter your messages"),
                 ),
                 SizedBox(height: height * 0.05),
@@ -52,10 +78,7 @@ class _postMessageState extends State<postMessage> {
                     color: Colors.blue,
                     textColor: Colors.white,
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return Beranda();
-                      }));
+                      postAMessage(messageController.text);
                     },
                   ),
                 ),

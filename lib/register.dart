@@ -1,9 +1,10 @@
 import 'dart:html';
-
+import 'dart:convert';
 import 'package:flute/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter/gestures.dart';
+import 'package:http/http.dart';
 
 class Register extends StatelessWidget {
   @override
@@ -23,6 +24,31 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final formKey = GlobalKey<FormState>(); //key for form
   String name = "";
+
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController firstPasswordController = TextEditingController();
+  TextEditingController secondPasswordController = TextEditingController();
+
+  void tryRegister(username, firstPassword, secondPassword) async  {
+    try {
+      if (firstPassword == secondPassword) {
+        final url = "http://localhost:8080/register";
+        final requestBody = json.encode({'username': '$username', 'password': '$firstPassword'});
+        final response = await post(Uri.parse(url), headers: {"Content-Type": "application/json"}, body: requestBody);
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) {
+          return Login();
+        }));
+      }
+      else {
+        // Tampilkan pesan password tidak sama
+      }
+    }
+    catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
@@ -57,6 +83,7 @@ class _HomeState extends State<Home> {
                 ),
                 SizedBox(height: height * 0.05),
                 TextFormField(
+                  controller: usernameController,
                   decoration: InputDecoration(labelText: "Username"),
                   validator: (value) {
                     if (value!.isEmpty ||
@@ -69,7 +96,9 @@ class _HomeState extends State<Home> {
                 ),
                 SizedBox(height: height * 0.05),
                 TextFormField(
+                  controller: firstPasswordController,
                   decoration: InputDecoration(labelText: "Password"),
+                  obscureText: true,
                   // validator: (value) {
                   //   if (value!.isEmpty ||
                   //       !RegExp(r'^[a-z A-Z]+$').hasMatch(value!)) {
@@ -81,7 +110,9 @@ class _HomeState extends State<Home> {
                 ),
                 SizedBox(height: height * 0.05),
                 TextFormField(
+                  controller: secondPasswordController,
                   decoration: InputDecoration(labelText: "Confirm Password"),
+                  obscureText: true,
                   // validator: (value) {
                   //   if (value!.isEmpty ||
                   //       !RegExp(r'^[a-z A-Z]+$').hasMatch(value!)) {
@@ -101,10 +132,8 @@ class _HomeState extends State<Home> {
                     color: Colors.blue,
                     textColor: Colors.white,
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return Login();
-                      }));
+                      tryRegister(usernameController.text, firstPasswordController.text, secondPasswordController.text);
+                      
                     },
                   ),
                 ),

@@ -84,6 +84,7 @@ class _LoginState extends State<Login> {
                 TextFormField(
                   controller: passwordController,
                   decoration: InputDecoration(labelText: "Password"),
+                  obscureText: true,
                   // validator: (value) {
                   //   if (value!.isEmpty ||
                   //       !RegExp(r'^[a-z A-Z]+$').hasMatch(value!)) {

@@ -4,6 +4,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flute/beranda.dart';
 import 'package:flutter/material.dart';
 import 'package:flute/register.dart';
+import 'package:flute/globals.dart' as globals;
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -24,6 +25,7 @@ class _ProfileState extends State<Profile> {
           color: Colors.red,
           textColor: Colors.white,
           onPressed: () {
+            globals.token = "";
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return Login();
             }));

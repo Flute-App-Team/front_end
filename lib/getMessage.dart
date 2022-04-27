@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:async';
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'dart:io';
@@ -22,7 +23,7 @@ class _GetMessageState extends State<GetMessage> {
       final url = "http://localhost:8080/message";
       final token = globals.token;
       final requestHeaders = {
-        HttpHeaders.authorizationHeader: 'Bearer $token',
+        'authorization': 'Bearer $token',
       };
       final response = await get(Uri.parse(url), headers: requestHeaders);
       final jsonData = jsonDecode(response.body) as List;
@@ -34,6 +35,7 @@ class _GetMessageState extends State<GetMessage> {
       print(e);
     }
   }
+
 
   int _currentIndex = 0;
   final List<Widget> _children = [];
@@ -62,8 +64,10 @@ class _GetMessageState extends State<GetMessage> {
           itemCount: _postsJson.length,
           itemBuilder: (context, i) {
             final post = _postsJson[i];
+            final DateTime datetime = DateTime.parse(post["timestamp"]).toLocal();
+            final dateformat = DateFormat('dd MMM yyyy | hh:mm').format(datetime);
             return Text(
-                "Username : ${post["username"]}\n Message : ${post["message"]}\n\n ");
+                "${post["username"]}\n${post["message"]}\n${dateformat}\n");
           },
         ),
         // bottomNavigationBar: BottomNavigationBar(
