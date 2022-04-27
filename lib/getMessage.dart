@@ -15,7 +15,6 @@ class GetMessage extends StatefulWidget {
 }
 
 class _GetMessageState extends State<GetMessage> {
-  
   var _postsJson = [];
 
   void fetchPosts() async {
