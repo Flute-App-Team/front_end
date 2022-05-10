@@ -1,9 +1,9 @@
-import 'dart:html';
+// import 'dart:html';
 import 'dart:convert';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flute/beranda.dart';
 import 'package:flutter/material.dart';
-import 'package:flute/register.dart';
+// import 'package:flute/register.dart';
 import 'package:http/http.dart';
 import 'package:flute/globals.dart' as globals;
 
@@ -28,13 +28,12 @@ class _postMessageState extends State<postMessage> {
         'Content-Type': 'application/json',
         'authorization': 'Bearer $token'
       };
-      final response = await post(Uri.parse(url), headers: requestHeaders, body: requestBody);
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) {
+      final response = await post(Uri.parse(url),
+          headers: requestHeaders, body: requestBody);
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
         return Beranda();
       }));
-    }
-    catch (e) {
+    } catch (e) {
       print(e);
     }
   }
