@@ -1,4 +1,4 @@
-import 'dart:html';
+// import 'dart:html';
 import 'dart:convert';
 import 'package:flute/login.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
   TextEditingController firstPasswordController = TextEditingController();
   TextEditingController secondPasswordController = TextEditingController();
 
-  void tryRegister(username, firstPassword, secondPassword) async  {
+  void tryRegister(username, firstPassword, secondPassword) async {
     try {
       if (firstPassword == secondPassword) {
         final url = "http://localhost:8080/register";
@@ -49,8 +49,7 @@ class _HomeState extends State<Home> {
       else {
         // Tampilkan pesan password tidak sama
       }
-    }
-    catch (e) {
+    } catch (e) {
       print(e);
     }
   }
@@ -91,14 +90,14 @@ class _HomeState extends State<Home> {
                 TextFormField(
                   controller: usernameController,
                   decoration: InputDecoration(labelText: "Username"),
-                  validator: (value) {
-                    if (value!.isEmpty ||
-                        !RegExp(r'^[a-z A-Z]+$').hasMatch(value!)) {
-                      return "Enter correct username";
-                    } else {
-                      return null;
-                    }
-                  },
+                  // validator: (value) {
+                  //   if (value!.isEmpty ||
+                  //       !RegExp(r'^[a-z A-Z]+$').hasMatch(value!)) {
+                  //     return "Enter correct username";
+                  //   } else {
+                  //     return null;
+                  //   }
+                  // },
                 ),
                 SizedBox(height: height * 0.05),
                 TextFormField(
@@ -138,8 +137,10 @@ class _HomeState extends State<Home> {
                     color: Colors.blue,
                     textColor: Colors.white,
                     onPressed: () {
-                      tryRegister(usernameController.text, firstPasswordController.text, secondPasswordController.text);
-                      
+                      tryRegister(
+                          usernameController.text,
+                          firstPasswordController.text,
+                          secondPasswordController.text);
                     },
                   ),
                 ),

@@ -1,9 +1,9 @@
-import 'dart:html';
+// import 'dart:html';
 import 'dart:convert';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flute/beranda.dart';
 import 'package:flutter/material.dart';
-import 'package:flute/register.dart';
+// import 'package:flute/register.dart';
 import 'package:http/http.dart';
 import 'package:flute/globals.dart' as globals;
 

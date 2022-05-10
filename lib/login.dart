@@ -1,4 +1,4 @@
-import 'dart:html';
+// import 'dart:html';
 import 'dart:convert';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flute/beranda.dart';
@@ -76,14 +76,14 @@ class _LoginState extends State<Login> {
                 TextFormField(
                   controller: usernameController,
                   decoration: InputDecoration(labelText: "Username"),
-                  validator: (value) {
-                    if (value!.isEmpty ||
-                        !RegExp(r'^[a-z A-Z]+$').hasMatch(value!)) {
-                      return "Enter correct username";
-                    } else {
-                      return null;
-                    }
-                  },
+                  // validator: (value) {
+                  //   if (value!.isEmpty ||
+                  //       !RegExp(r'^[a-z A-Z]+$').hasMatch(value!)) {
+                  //     return "Enter correct username";
+                  //   } else {
+                  //     return null;
+                  //   }
+                  // },
                 ),
                 SizedBox(height: height * 0.05),
                 TextFormField(
