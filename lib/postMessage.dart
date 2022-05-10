@@ -29,10 +29,15 @@ class _postMessageState extends State<postMessage> {
         'authorization': 'Bearer $token'
       };
       final response = await post(Uri.parse(url), headers: requestHeaders, body: requestBody);
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) {
-        return Beranda();
-      }));
+      if (response.statusCode == 200) {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) {
+          return Beranda();
+        }));
+      }
+      else {
+        print('Error: ' + response.body);
+      }
     }
     catch (e) {
       print(e);

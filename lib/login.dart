@@ -29,11 +29,16 @@ class _LoginState extends State<Login> {
           json.encode({'username': '$username', 'password': '$password'});
       final response = await post(Uri.parse(url),
           headers: {"Content-Type": "application/json"}, body: requestBody);
-      globals.token = response.body;
-      print(globals.token);
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return Beranda();
-      }));
+      if (response.statusCode == 200) {
+        globals.token = response.body;
+        print(globals.token);
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return Beranda();
+        }));
+      }
+      else {
+        print('Error: ' + response.body);
+      }
     } catch (e) {
       print(e);
     }

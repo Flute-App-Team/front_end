@@ -35,10 +35,16 @@ class _HomeState extends State<Home> {
         final url = "http://localhost:8080/register";
         final requestBody = json.encode({'username': '$username', 'password': '$firstPassword'});
         final response = await post(Uri.parse(url), headers: {"Content-Type": "application/json"}, body: requestBody);
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) {
-          return Login();
-        }));
+
+        if (response.statusCode == 200) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) {
+            return Login();
+          }));
+        }
+        else {
+          print('Error: ' + response.body);
+        }
       }
       else {
         // Tampilkan pesan password tidak sama

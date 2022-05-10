@@ -25,11 +25,15 @@ class _GetMessageState extends State<GetMessage> {
         'authorization': 'Bearer $token',
       };
       final response = await get(Uri.parse(url), headers: requestHeaders);
-      final jsonData = jsonDecode(response.body) as List;
-
-      setState(() {
-        _postsJson = jsonData;
-      });
+      if (response.statusCode == 200) {
+        final jsonData = jsonDecode(response.body) as List;
+        setState(() {
+          _postsJson = jsonData;
+        });
+      }
+      else {
+        print('Error: ' + response.body);
+      }
     } catch (e) {
       print(e);
     }
