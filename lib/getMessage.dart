@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:async';
 import 'package:intl/intl.dart';
+import 'package:flute/login.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'dart:io';
@@ -30,6 +31,13 @@ class _GetMessageState extends State<GetMessage> {
         setState(() {
           _postsJson = jsonData;
         });
+      }
+      else if (response.statusCode == 403) {
+        print('Token expired');
+        Navigator.push(context,
+              MaterialPageRoute(builder: (context) {
+            return Login();
+          }));
       }
       else {
         print('Error: ' + response.body);

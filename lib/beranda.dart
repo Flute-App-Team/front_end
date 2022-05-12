@@ -15,20 +15,20 @@ class Beranda extends StatefulWidget {
 }
 
 class _BerandaState extends State<Beranda> {
-  final url = "https://jsonplaceholder.typicode.com/posts";
+  // final url = "https://jsonplaceholder.typicode.com/posts";
 
-  var _postsJson = [];
+  // var _postsJson = [];
 
-  void fetchPosts() async {
-    try {
-      final response = await get(Uri.parse(url));
-      final jsonData = jsonDecode(response.body) as List;
+  // void fetchPosts() async {
+  //   try {
+  //     final response = await get(Uri.parse(url));
+  //     final jsonData = jsonDecode(response.body) as List;
 
-      setState(() {
-        _postsJson = jsonData;
-      });
-    } catch (e) {}
-  }
+  //     setState(() {
+  //       _postsJson = jsonData;
+  //     });
+  //   } catch (e) {}
+  // }
 
   int _currentIndex = 0;
   final List<Widget> _children = [GetMessage(), Profile()];
@@ -59,12 +59,12 @@ class _BerandaState extends State<Beranda> {
   //   });
   // }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    fetchPosts();
-  }
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   fetchPosts();
+  // }
 
   @override
   Widget build(BuildContext context) {

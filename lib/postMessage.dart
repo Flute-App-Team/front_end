@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flute/beranda.dart';
 import 'package:flutter/material.dart';
+import 'package:flute/login.dart';
 // import 'package:flute/register.dart';
 import 'package:http/http.dart';
 import 'package:flute/globals.dart' as globals;
@@ -34,6 +35,13 @@ class _postMessageState extends State<postMessage> {
             MaterialPageRoute(builder: (context) {
           return Beranda();
         }));
+      }
+      else if (response.statusCode == 403) {
+        print('Token expired');
+        Navigator.push(context,
+              MaterialPageRoute(builder: (context) {
+            return Login();
+          }));
       }
       else {
         print('Error: ' + response.body);
