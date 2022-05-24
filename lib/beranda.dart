@@ -96,6 +96,7 @@ class _BerandaState extends State<Beranda> {
         //   // selectedItemColor: Colors.amber[800],
         //   // onTap: _onItemTapped,
         // ),
+
         body: _children[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
           onTap: onTappedBar,

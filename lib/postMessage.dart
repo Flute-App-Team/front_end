@@ -29,25 +29,22 @@ class _postMessageState extends State<postMessage> {
         'Content-Type': 'application/json',
         'authorization': 'Bearer $token'
       };
-      final response = await post(Uri.parse(url), headers: requestHeaders, body: requestBody);
+      final response = await post(Uri.parse(url),
+          headers: requestHeaders, body: requestBody);
       if (response.statusCode == 200) {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
           return Beranda();
         }));
-      }
-      else if (response.statusCode == 403) {
+      } else if (response.statusCode == 401) {
         print('Token expired');
-        Navigator.push(context,
-              MaterialPageRoute(builder: (context) {
-            return Login();
-          }));
-      }
-      else {
+        _showError401();
+        // Navigator.push(context, MaterialPageRoute(builder: (context) {
+        //   return Login();
+        // }));
+      } else {
         print('Error: ' + response.body);
       }
-    }
-    catch (e) {
+    } catch (e) {
       print(e);
     }
   }
@@ -119,5 +116,34 @@ class _postMessageState extends State<postMessage> {
             ),
           ),
         ));
+  }
+
+  Future<void> _showError401() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Error Token'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('Token expired'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Back'),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return Login();
+                }));
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
