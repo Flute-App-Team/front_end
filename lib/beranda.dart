@@ -6,6 +6,7 @@ import 'package:flute/postMessage.dart';
 import 'package:flute/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:flute/fileAccess.dart';
 
 class Beranda extends StatefulWidget {
   const Beranda({Key? key}) : super(key: key);
@@ -31,7 +32,7 @@ class _BerandaState extends State<Beranda> {
   // }
 
   int _currentIndex = 0;
-  final List<Widget> _children = [GetMessage(), Profile()];
+  final List<Widget> _children = [GetMessage(storage: TokenStorage()), Profile()];
 
   void onTappedBar(int index) {
     setState(() {

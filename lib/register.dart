@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter/gestures.dart';
 import 'package:http/http.dart';
+import 'package:flute/fileAccess.dart';
 
 class Register extends StatelessWidget {
   @override
@@ -32,7 +33,7 @@ class _HomeState extends State<Home> {
   void tryRegister(username, firstPassword, secondPassword) async {
     try {
       if (firstPassword == secondPassword) {
-        final url = "http://localhost:8080/register";
+        final url = "http://192.168.1.79:8080/register";
         final requestBody = json
             .encode({'username': '$username', 'password': '$firstPassword'});
         final response = await post(Uri.parse(url),
@@ -40,7 +41,7 @@ class _HomeState extends State<Home> {
 
         if (response.statusCode == 200) {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return Login();
+            return Login(storage: TokenStorage());
           }));
         } else if (response.statusCode == 400) {
           print('Error: ' + response.body);
@@ -162,7 +163,7 @@ class _HomeState extends State<Home> {
                           ..onTap = () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return Login();
+                              return Login(storage: TokenStorage());
                             }));
                           },
                       ),

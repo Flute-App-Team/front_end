@@ -5,6 +5,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter/material.dart';
 // import 'package:flute/register.dart';
 import 'package:flute/globals.dart' as globals;
+import 'package:flute/fileAccess.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -27,7 +28,7 @@ class _ProfileState extends State<Profile> {
           onPressed: () {
             globals.token = "";
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return Login();
+              return Login(storage: TokenStorage());
             }));
           },
         ),
