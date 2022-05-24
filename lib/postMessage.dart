@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flute/login.dart';
 // import 'package:flute/register.dart';
 import 'package:http/http.dart';
+import 'package:flute/fileAccess.dart';
 import 'package:flute/globals.dart' as globals;
 
 class postMessage extends StatefulWidget {
@@ -22,7 +23,7 @@ class _postMessageState extends State<postMessage> {
 
   void postAMessage(message) async {
     try {
-      final url = "http://localhost:8080/message";
+      final url = "http://192.168.1.79:8080/message";
       final token = globals.token;
       final requestBody = json.encode({'message': '$message'});
       final requestHeaders = {
@@ -36,11 +37,11 @@ class _postMessageState extends State<postMessage> {
           return Beranda();
         }));
       }
-      else if (response.statusCode == 403) {
-        print('Token expired');
+      else if (response.statusCode == 401) {
+        print('Unautorized');
         Navigator.push(context,
               MaterialPageRoute(builder: (context) {
-            return Login();
+            return Login(storage: TokenStorage());
           }));
       }
       else {

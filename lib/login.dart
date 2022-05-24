@@ -6,12 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flute/register.dart';
 import 'package:flutter/gestures.dart';
 import 'package:http/http.dart';
+import 'package:flute/fileAccess.dart';
 
 import 'package:flute/globals.dart' as globals;
 
 class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
-
+  const Login({Key? key, required this.storage}) : super(key: key);
+  final TokenStorage storage;
   @override
   State<Login> createState() => _LoginState();
 }
@@ -24,7 +25,7 @@ class _LoginState extends State<Login> {
 
   void tryLogin(username, password) async {
     try {
-      final url = "http://localhost:8080/login";
+      final url = "http://192.168.1.79:8080/login";
       final requestBody =
           json.encode({'username': '$username', 'password': '$password'});
       final response = await post(Uri.parse(url),
@@ -32,6 +33,7 @@ class _LoginState extends State<Login> {
       if (response.statusCode == 200) {
         globals.token = response.body;
         print(globals.token);
+        widget.storage.writeToken(globals.token);
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return Beranda();
         }));

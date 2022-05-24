@@ -6,11 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'dart:io';
 import 'package:flutter/gestures.dart';
+import 'package:flute/fileAccess.dart';
 import 'package:flute/globals.dart' as globals;
 
 class GetMessage extends StatefulWidget {
-  const GetMessage({Key? key}) : super(key: key);
-
+  const GetMessage({Key? key, required this.storage}) : super(key: key);
+  final TokenStorage storage;
   @override
   State<GetMessage> createState() => _GetMessageState();
 }
@@ -20,7 +21,8 @@ class _GetMessageState extends State<GetMessage> {
 
   void fetchPosts() async {
     try {
-      final url = "http://localhost:8080/message";
+      
+      final url = "http://192.168.1.79:8080/message";
       final token = globals.token;
       final requestHeaders = {
         'authorization': 'Bearer $token',
@@ -32,11 +34,11 @@ class _GetMessageState extends State<GetMessage> {
           _postsJson = jsonData;
         });
       }
-      else if (response.statusCode == 403) {
-        print('Token expired');
+      else if (response.statusCode == 401) {
+        print('Unauthorized');
         Navigator.push(context,
               MaterialPageRoute(builder: (context) {
-            return Login();
+            return Login(storage: TokenStorage());
           }));
       }
       else {
@@ -61,7 +63,12 @@ class _GetMessageState extends State<GetMessage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    fetchPosts();
+    widget.storage.readToken().then((String value) {
+      setState(() {
+        globals.token = value;
+      });
+      fetchPosts();
+    });
   }
 
   @override
