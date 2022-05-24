@@ -37,9 +37,9 @@ class _LoginState extends State<Login> {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return Beranda();
         }));
-      }
-      else {
+      } else if (response.statusCode == 409) {
         print('Error: ' + response.body);
+        _showError401();
       }
     } catch (e) {
       print(e);
@@ -174,6 +174,35 @@ class _LoginState extends State<Login> {
             ),
           ),
         ));
+  }
+
+  Future<void> _showError401() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Error Login'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('Invalid username or password'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Kembali'),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return Register();
+                }));
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
 

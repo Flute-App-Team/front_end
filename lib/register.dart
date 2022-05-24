@@ -7,7 +7,6 @@ import 'package:flutter/gestures.dart';
 import 'package:http/http.dart';
 import 'package:flute/fileAccess.dart';
 
-
 class Register extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -35,21 +34,25 @@ class _HomeState extends State<Home> {
     try {
       if (firstPassword == secondPassword) {
         final url = "http://192.168.1.79:8080/register";
-        final requestBody = json.encode({'username': '$username', 'password': '$firstPassword'});
-        final response = await post(Uri.parse(url), headers: {"Content-Type": "application/json"}, body: requestBody);
+        final requestBody = json
+            .encode({'username': '$username', 'password': '$firstPassword'});
+        final response = await post(Uri.parse(url),
+            headers: {"Content-Type": "application/json"}, body: requestBody);
 
         if (response.statusCode == 200) {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
             return Login(storage: TokenStorage());
           }));
-        }
-        else {
+        } else if (response.statusCode == 400) {
           print('Error: ' + response.body);
+          _showError400();
+        } else if (response.statusCode == 409) {
+          print('Error: ' + response.body);
+          _showError409();
         }
-      }
-      else {
+      } else {
         // Tampilkan pesan password tidak sama
+        _showErrorPass();
       }
     } catch (e) {
       print(e);
@@ -204,6 +207,107 @@ class _HomeState extends State<Home> {
             ),
           ),
         ));
+  }
+
+  Future<void> _showErrorPass() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Password Yang Anda Masukan Tidak Sama'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('Silahkan masukan kembali password Anda'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Kembali'),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return Register();
+                }));
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _showError400() async {
+    // print(response);
+    // String _response = response;
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        // print(response);
+        return AlertDialog(
+          // semanticLabel: response,
+          // title: const Text('Error : response'),
+          // title: const Text('Error :' '$response'),
+          title: const Text('Error Register'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                // Text('Error :' _response),
+                Text('Password Empty'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Back'),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return Register();
+                }));
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _showError409() async {
+    // print(response);
+    // String _response = response;
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        // print(response);
+        return AlertDialog(
+          // semanticLabel: response,
+          // title: const Text('Error : response'),
+          // title: const Text('Error :' '$response'),
+          title: const Text('Error Register'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                // Text('Error :' _response),
+                Text('Username Exist'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Back'),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return Register();
+                }));
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
 
