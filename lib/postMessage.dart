@@ -36,11 +36,18 @@ class _postMessageState extends State<postMessage> {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return Beranda();
         }));
+      } else if (response.statusCode == 400) {
+        print('Unautorized');
+        _showError400();
+        // Navigator.push(context, MaterialPageRoute(builder: (context) {
+        //   return Login(storage: TokenStorage());
+        // }));
       } else if (response.statusCode == 401) {
         print('Unautorized');
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Login(storage: TokenStorage());
-        }));
+        _showError401();
+        // Navigator.push(context, MaterialPageRoute(builder: (context) {
+        //   return Login(storage: TokenStorage());
+        // }));
       } else {
         print('Error: ' + response.body);
       }
@@ -116,6 +123,35 @@ class _postMessageState extends State<postMessage> {
             ),
           ),
         ));
+  }
+
+  Future<void> _showError400() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Error Post'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('Message Empty'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Back'),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return postMessage();
+                }));
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Future<void> _showError401() async {
