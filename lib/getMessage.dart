@@ -127,7 +127,7 @@ class _GetMessageState extends State<GetMessage> {
                     TextSpan(
                       text: "   ${post["username"]}\n",
                       style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                          TextStyle(color: Colors.black, fontSize: 12, fontWeight: FontWeight.bold),
                     ),
                     TextSpan(
                       text: '  ${post["message"]}\n',
@@ -135,7 +135,7 @@ class _GetMessageState extends State<GetMessage> {
                     ),
                     TextSpan(
                       text: '   $dateformat\n',
-                      style: TextStyle(fontSize: 12),
+                      style: TextStyle(color: Colors.black, fontSize: 12),
                     ),
                   ],
                 ),

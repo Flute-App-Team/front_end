@@ -154,7 +154,7 @@ class _HomeState extends State<Home> {
                     children: [
                       TextSpan(
                         text: 'Have an account already?',
-                        // style: TextStyle(color: Colors.red[300]),
+                        style: TextStyle(color: Colors.black),
                       ),
                       TextSpan(
                         text: ' Login',
